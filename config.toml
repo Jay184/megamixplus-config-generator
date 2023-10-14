@@ -1,0 +1,9 @@
+enabled = true
+include = ["."]
+dll = ["ModdedTab.dll"]
+
+name = "ModdedTab"
+description = "Replaces 'Favorites' with 'Modded' in the song select."
+version = "0.0.5"
+date = "14.10.2023"
+author = "Jay <Jay#4711>, testsnake"

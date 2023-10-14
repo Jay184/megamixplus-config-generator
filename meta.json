@@ -1,0 +1,14 @@
+{
+  "name": "ModdedTab",
+  "description": "Replaces 'Favorites' with 'Modded' in the song select.",
+  "descriptionLong": "Replaces 'Favorites' with 'Modded' in the song select. This one is ignored in config.toml.",
+  "version": [ 0, 0, 5 ],
+  "firstRelease": "2023-01-19T00:00:00.000Z",
+  "lastUpdate": "2023-01-29T00:00:00.000Z",
+  "authors": [ "Jay <Jay#4711>", "testsnake" ],
+  "tags": [ "code", "ui" ],
+  "supportedVersions": [ 100, 101, 102, 103 ],
+  "loadBefore": [],
+  "loadAfter": [],
+  "binaries": [ "ModdedTab.dll" ]
+}

@@ -1,0 +1,54 @@
+name: Generate config.toml
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+env:
+  META_PATH: 'meta.json'
+  CONFIG_PATH: 'config.toml'
+
+permissions:
+  contents: write
+
+jobs:
+  generate_toml:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: "Checkout source code"
+      uses: actions/checkout@v3
+  
+    - name: "Set up Python 3.10"
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: "Install dependencies"
+      run: pip install tomlkit
+
+    - name: "Generate TOML"
+      run: |
+        python generate-config.py "${{ env.META_PATH }}" "${{ env.CONFIG_PATH }}"
+
+    - name: "Commit config.toml"
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add "${{ env.CONFIG_PATH }}"
+        git commit -m "Add generated config.toml." || true
+
+    - name: "Push changes"
+      uses: ad-m/github-push-action@v0.6.0
+      with:
+        branch: ${{ github.head_ref }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        force: true
+
+    - name: "Upload artifacts"
+      uses: actions/upload-artifact@v3
+      with:
+        name: config.toml
+        path: ${{ env.CONFIG_PATH }}
